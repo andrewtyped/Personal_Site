@@ -1,0 +1,11 @@
+﻿
+.blockTextArea {
+    border-radius:6px;
+    padding:5px;
+    resize:none;
+}
+
+#blogPostSubmit {
+    display:inline;
+    margin-left:20%;
+}

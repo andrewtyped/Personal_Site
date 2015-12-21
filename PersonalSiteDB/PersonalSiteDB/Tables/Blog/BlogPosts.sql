@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[BlogPosts]
+(
+	[Id] INT PRIMARY KEY IDENTITY,
+	[Title] VARCHAR(200) DEFAULT 'UNTITLED',
+	[DateCreated] DATETIME,
+	[Content] VARCHAR(MAX) DEFAULT 'EMPTY',
+)

@@ -1,0 +1,39 @@
+﻿@using PersonalSite.Views
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Andrew Typed</title>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" type="text/css"
+          href="https://fonts.googleapis.com/css?family=Lato:400,300,700,400italic,300italic">
+    <link rel="stylesheet" href="~/Styles/Main.css" />
+    <link rel="stylesheet" href="~/Styles/prettify.css" />
+    <script type="text/javascript" src="~/Scripts/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Markdown.Converter.js"></script>
+    <script type="text/javascript" src="~/Scripts/Markdown.Sanitizer.js"></script>
+    <script type="text/javascript" src="~/Scripts/prettify.js"></script>
+</head>
+<body>   
+    <div id="contentWrapper">
+        <div id="header">
+            <div id="loginTray">
+                <a class="headerLink" href="@Url.Action("Login","LoginAccount")">Log In</a>
+                <a class="headerLink" href="@Url.Action("Signup","Signup")"@*,null,"https")"*@>Sign Up</a>
+            </div>
+            <div class="clear"></div> 
+            <div class="siteTitleContainer">
+                <a id="siteTitle" class="headerLink" href="@Url.Action("Index","Home")">Andrew Typed</a>
+            </div>
+            <nav class="menu">
+                <a class="headerLink" href="@Url.Action("Resume","Home")">Resume</a>
+                <a class="headerLink" href="@Url.Action("About","Home")">About</a>
+                @Html.ActionLink("New Content", "Content", "Content", null, new { @class="headerLink" }).If(User.IsInRole("admin"))
+            </nav>
+        </div>
+        <div id="mainContent">
+            @RenderBody()
+        </div>
+    </div>
+</body>
+</html>

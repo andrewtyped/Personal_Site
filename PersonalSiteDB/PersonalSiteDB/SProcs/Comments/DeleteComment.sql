@@ -1,0 +1,11 @@
+﻿CREATE PROCEDURE [dbo].[usp_DeleteComment]
+	@Id INT = NULL
+AS
+BEGIN
+
+SET NOCOUNT ON
+
+	DELETE FROM Comments
+	WHERE Id = @Id
+
+END

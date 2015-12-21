@@ -1,0 +1,62 @@
+﻿@using PersonalSite.Models;
+@using PersonalSite.Views;
+
+@model  PersonalSite.Views.BlogViewModel
+<div class="tagCloudContainer">
+    <h3>Categories</h3>
+    @foreach (TagViewModel tag in @Model.TagCloud)
+    {
+        <a class="tagCloudTag" 
+           href="@Url.Action("GetBlogPostsByTag","Home",new {tagName = @tag.CountedTag.Name})"
+           style="font-size:@tag.FontSize.ToString()px">@tag.CountedTag.Name</a>
+    }
+</div>
+<div class="blogPostContainer">
+    @foreach (BlogPost post in @Model.Posts)
+    {
+        <div class="blogPost">
+            <div class ="wideSplitHeader">
+                <time class="postDate wideSplitHeaderLeft">@post.DateCreated.PrettifyDateTime()</time>
+                @Html.ActionLink("edit", "EditContent", "Content", new { id = @post.Id }, new { @class = "wideSplitHeaderRight" }).If(User.IsInRole("admin"))
+            </div>
+            <a class="postTitle" href="@Url.Action("GetBlogPostById","Home", new {id = @post.Id})"><h2>@post.Title</h2></a>
+            <div class="postContent">@Html.Raw(@post.Content)</div>
+            <div class="postTags">
+                @if(post.Tags.Count > 0)
+                {
+                    <span>Seems like: </span>
+                    foreach (Tag tag in post.Tags)
+                    {
+                        <span>@tag.Name</span>
+                    }
+                }
+            </div>
+        </div>
+    }
+    @if(@Model.OlderNewerNavEnabled)
+    {
+        <div class="blogPost">
+
+            <div class ="wideSplitHeader">
+                @{
+                    var maxPostId = @Model.Posts.Max(m => m.Id);
+                    var minPostId = @Model.Posts.Min(m => m.Id);
+                }
+
+                @Html.ActionLink("<< older", "GetOlderPosts", "Home", new { maxId = minPostId }, new { @class = "wideSplitHeaderLeft" }).If(@Model.BlogStats.MinPostId != minPostId)
+                @Html.ActionLink("newer >>", "GetNewerPosts", "Home", new { minId = maxPostId }, new { @class = "wideSplitHeaderRight" }).If(@Model.BlogStats.MaxPostId != maxPostId)      
+            </div>
+        </div>
+    }
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        ConvertPostToPrettifiedHtml = function () {
+            $(".postContent pre").addClass("prettyprint");
+            //Won't work as is - the sanitizing converter gets rid of the pre-processor directives
+            prettyPrint();
+        };
+
+        ConvertPostToPrettifiedHtml()
+    });
+</script>

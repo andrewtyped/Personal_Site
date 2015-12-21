@@ -1,0 +1,71 @@
+﻿@model PersonalSite.Views.BlogPostViewModel
+<link rel="stylesheet" href="~/Styles/BlogPost.css" />
+
+@if(@Model != null)
+{
+    <input type="hidden" id="blogPostId" value="@Model.Id" />
+}
+
+@Html.TextBoxFor(m => m.Title, new { id = "blogPostTitle", @class = "wideTextArea", @placeholder = "Title" })
+@Html.TextBoxFor(m => m.Tags, new { id = "blogPostTags", @class = "wideTextArea", @placeholder = "Tags" })
+@Html.TextAreaFor(m => m.Content, new { id = "blogPostContent", @class = "blockTextArea", rows = "20" })
+<div id="blogPostMarkdownPreview" class="midContentContainer postContent"></div>
+<input id="blogPostSubmit" class="bigSubmit" type="button" value="Submit" />
+<span id="blogPostSubmitResult" class="inlineValidation"></span>
+<script type="text/javascript">
+    var CreateBlogPost;
+    var ConvertPostToPrettifiedHtml;
+    var MarkDownPreview;
+    var MarkDownPreviewPreTags;
+    var BlogPostArea;
+    var Converter = new Markdown.getSanitizingConverter();
+
+    $(document).ready(function () {
+
+        MarkDownPreview = $("#blogPostMarkdownPreview");
+        MarkDownPreviewPreTags = $("pre");
+        BlogPostArea = $("#blogPostContent");
+
+        ConvertPostToPrettifiedHtml = function () {
+            MarkDownPreview.text("");
+            MarkDownPreview.append(Converter.makeHtml(BlogPostArea.val()));
+            $("#blogPostMarkdownPreview pre").addClass("prettyprint");
+            prettyPrint();
+        };
+
+        ConvertPostToPrettifiedHtml();
+
+        BlogPostArea.bind("keyup", function (event) {
+            ConvertPostToPrettifiedHtml();
+        });
+
+        CreateBlogPost = function(title, tags, content, id) {
+            $.ajax({
+                url: '/Content/AddEditBlogPost',
+                type: 'POST',
+                data: JSON.stringify({
+                    title: title,
+                    tags: tags,
+                    content: content,
+                    id: id
+                }),
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    $("#blogPostSubmitResult").text(data.Result);
+                },
+                error: function (data) {
+                    $("#blogPostSubmitResult").text("There was a problem sending this data to the server.");
+                }
+            });
+        };
+
+        $("#blogPostSubmit").bind("click", function (event) {
+            var postTitle = $("#blogPostTitle").val();
+            var postTags = $("#blogPostTags").val();
+            var postContent = $("#blogPostContent").val();
+            var postId = $("#blogPostId").val();
+
+            CreateBlogPost(postTitle, postTags, postContent, postId);
+        });
+    });
+</script>

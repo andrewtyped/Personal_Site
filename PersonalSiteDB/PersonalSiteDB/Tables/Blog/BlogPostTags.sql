@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[BlogPostTags]
+(
+	[BlogPostId] INT NOT NULL FOREIGN KEY REFERENCES BlogPosts(Id),
+	[TagId] INT NOT NULL FOREIGN KEY REFERENCES Tags(Id)
+)

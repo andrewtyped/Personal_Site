@@ -1,0 +1,8 @@
+﻿CREATE PROCEDURE [dbo].[usp_GetTags]
+AS
+BEGIN
+	SELECT Id, Name
+	FROM Tags
+	ORDER BY Name
+END
+GO

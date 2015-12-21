@@ -1,0 +1,30 @@
+﻿@model PersonalSite.Views.SignupViewModel
+<div class="signinbox">
+<h2 class="pageHeaders">
+    Sign Up
+</h2>
+        <div id="signup" class="midContentContainer">
+		    <div id="signupUser">
+                @Html.TextBoxFor(m => m.UserName, new {@id = "signupUsernameText", @class = "shortTextArea", @placeholder = "Username"})
+                <span id="signupUsernameValidation" class="inlineValidation"></span>
+		    </div>
+		    <div id="signupEmail">
+			    @Html.TextBoxFor(m => m.Email, new {@id = "signupEmailText", @class="shortTextArea", @placeholder = "Email Address"})
+                <span id="signupEmailValidation" class="inlineValidation"></span>
+		    </div>
+		    <div id="signupPassword">
+			    @Html.PasswordFor(m => m.Password, new {@id = "signupPasswordText", @class="shortTextArea", @placeholder = "Password"})
+                <span id="signupPasswordValidation" class="inlineValidation"></span>
+		    </div>
+            <div id="signupConfirmPassword">
+                @Html.PasswordFor(m => m.ConfirmPassword, new {@id = "signupConfirmPasswordText", @class="shortTextArea", @placeholder = "Confirm Password"})
+                <span id="signupConfirmPasswordValidation" class="inlineValidation"></span>
+            </div>
+            <div id="signupSubmit">
+                <input id="signupSubmitButton" class="bigSubmit" type="button" value="Submit"/>
+                <span id="signupResult" class="inlineValidation"></span>            
+            </div>
+        </div>    
+</div>
+<script type="text/javascript" src="~/Scripts/Signup.js">
+</script>

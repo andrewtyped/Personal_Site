@@ -1,0 +1,34 @@
+﻿@model PersonalSite.Views.LoginViewModel
+<div class="signinbox">
+<h2 class="pageHeaders">
+    Log In
+</h2>
+ 
+    @using (Html.BeginForm("LogOn", "LoginAccount", FormMethod.Post)) {
+        <div id="login" class="midContentContainer">
+		    <div id="loginUser">
+                @Html.TextBoxFor(m => m.UserName, new { @id = "loginUsernameText", @class = "shortTextArea", @placeholder = "Username" })
+		    </div>
+		    <div id="loginPassword">
+			    @Html.PasswordFor(m => m.Password, new { @id = "loginPasswordText", @class="shortTextArea", @placeholder = "Password"})
+		    </div>
+            <div id="loginSubmit">
+                <input type="submit" class="bigSubmit" value="Submit"/>
+            </div>
+            @if (!ViewData.ModelState.IsValid)
+            {
+                <div id="errorMessage">
+                    @Html.ValidationMessage("Login")
+                </div>
+            }
+        </div>
+        
+    }
+ 
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //$("#loginUsernameText").val = "Username";
+        //$("#loginPasswordText").val = "Password";
+    });
+</script>

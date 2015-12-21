@@ -1,0 +1,11 @@
+﻿CREATE TABLE [dbo].[Comments]
+(
+	Id INT PRIMARY KEY IDENTITY,
+	UserId INT FOREIGN KEY REFERENCES [dbo].[User](Id) NOT NULL,
+	PostId INT FOREIGN KEY REFERENCES [dbo].[BlogPosts](Id) NOT NULL,
+	RepliesTo INT FOREIGN KEY REFERENCES [dbo].[Comments](Id),
+	Content VARCHAR(MAX) NOT NULL,
+	InModeration BIT NOT NULL DEFAULT 0,
+	DateCreated DATETIME,
+	LastModified DATETIME
+)
