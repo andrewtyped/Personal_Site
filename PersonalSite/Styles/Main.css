@@ -378,6 +378,10 @@ li {
         padding-top:10px;
     }
 
+    #siteTitle, .menu {
+        margin-left:7.5%;
+    }
+
     #loginTray {
         display:none;
     }
@@ -393,12 +397,21 @@ li {
         height:130px;
     }
 
+    .siteTitleContainer, .menu {
+        text-align:center;
+    }
+
+    #siteTitle, .menu {
+        margin-left:0;
+        margin-right:0;
+    }
+
     #siteTitle {
         font-size:2.5rem;
     }
 
     .blogPostContainer {
-        width:95%;
+        width:98%;
     }
 }
 
