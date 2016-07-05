@@ -168,7 +168,7 @@
     <Content Include="Scripts\prettify.js" />
     <Content Include="Scripts\Signup.js" />
     <Content Include="Styles\BlogPost.css" />
-    <Content Include="Styles\ImageContent\Andrew.png" />
+    <Content Include="Styles\ImageContent\Andrew.jpg" />
     <Content Include="Styles\ImageContent\May2014\Applause.gif" />
     <Content Include="Styles\Main.css" />
     <Content Include="Styles\prettify.css" />
