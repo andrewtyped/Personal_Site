@@ -30,6 +30,18 @@ body {
     font-family: 'Lato', sans-serif !important;
 }
 
+i.fa {
+    color:#01131d;
+}
+
+i.fa:hover {
+    color:#557d92;
+}
+
+ul.social-media li {
+    display:inline;
+}
+
 #contentWrapper {
     width:100%;
     height:100%;
@@ -203,7 +215,7 @@ body {
     float:right;
     margin:1%;
     padding:5px;
-    border-radius:6px;
+    border-radius:300px;
 }
 
 .pageHeaders {
